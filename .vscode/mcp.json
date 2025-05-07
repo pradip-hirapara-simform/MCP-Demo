@@ -1,0 +1,54 @@
+{
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "api-key",
+      "description": "API Key",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "figma-key",
+      "description": "Figma API Key",
+      "password": true
+    },
+    {
+      "type": "promptString",
+      "id": "github-token",
+      "description": "GitHub Token",
+      "password": true
+    }
+  ],
+  "servers": {
+    "MyServer": {
+      "type": "stdio",
+      "command": "/Users/pradip/.nvm/versions/node/v21.7.3/bin/npx",
+      "args": ["-y", "@modelcontextprotocol/server-example"],
+      "env": {
+        "API_KEY": "${input:api-key}",
+        "PATH": "/Users/pradip/.nvm/versions/node/v21.7.3/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    },
+    "figma": {
+      "type": "stdio",
+      "command": "/Users/pradip/.nvm/versions/node/v21.7.3/bin/npx",
+      "args": ["-y", "figma-developer-mcp", "--studio"],
+      "env": {
+        "FIGMA_API_KEY": "${input:figma-key}",
+        "PATH": "/Users/pradip/.nvm/versions/node/v21.7.3/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    },
+    "github": {
+      "type": "stdio",
+      "command": "/Users/pradip/.nvm/versions/node/v21.7.3/bin/npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github-token}",
+        "PATH": "/Users/pradip/.nvm/versions/node/v21.7.3/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    }
+  }
+}
